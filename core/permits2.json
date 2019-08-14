@@ -1,0 +1,17 @@
+{
+  "adm": [
+    "ErrorController",
+    "SiteController",
+    "TableOneController",
+    "TableTwoController",
+    "UserGroupController",
+    "UsersController"
+  ],
+  "usr": [
+    "tableOneController"
+  ],
+  "dft": [
+    "tableOneController",
+    "tableTwoController"
+  ]
+}

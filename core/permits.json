@@ -1,0 +1,10 @@
+{
+  "adm": [],
+  "usr": [
+    "tableOneController"
+  ],
+  "dft": [
+    "tableOneController",
+    "tableTwoController"
+  ]
+}

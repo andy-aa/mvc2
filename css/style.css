@@ -1,0 +1,154 @@
+body {
+    margin: 48px 0 0 0;
+}
+
+#maincontent {
+    margin: 0 5px;
+    width: 100%;
+}
+
+.status {
+    text-align: right;
+    color: red;
+    width: 98%;
+    background: rgb(241, 235, 235);
+    padding: 0 1%;
+}
+
+.menu li {
+    float: left;
+    list-style: none;
+}
+
+.menu li:last-child {
+    float: right;
+}
+
+.menu a {
+    display: block;
+    background: blue;
+    color: black;
+    text-decoration: none;
+    padding: 15px 16px;
+}
+
+.menu a:hover {
+    background: lightslategray;
+}
+
+.menu {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background: yellow;
+}
+
+.table {
+    border-collapse: collapse;
+    min-width: 200px;
+}
+
+.table td,
+.table th {
+    border: 1px black solid;
+}
+
+.table tr:nth-child(2n) {
+    background: lightgray;
+}
+
+.delLink,
+.editLink {
+    color: blue;
+    display: inline-block;
+    transition: all 1s ease-out;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.delLink:hover {
+    color: red;
+    /*transform: rotateZ(calc(2 * 180deg));*/
+}
+
+.editLink:hover {
+    color: green;
+    /*transform: rotateX(calc(1 * 180deg));*/
+}
+
+.pagination a {
+    background: lightblue;
+    display: inline-block;
+    padding: 1px 10px;
+    margin: 2px 2px;
+    border-radius: 15%
+}
+
+.pagination a:not(.currentPage):hover {
+    background: lightskyblue;
+}
+
+.pagination .currentPage {
+    background: lightsalmon;
+}
+
+.loginForm {
+    background: silver;
+    height: 150px;
+    width: 200px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 20px;
+    border: 1px solid blue;
+}
+
+.loginForm input {
+    margin: 20px auto;
+    display: block;
+    line-height: 20px;
+}
+
+.editTable input:not([type="submit"]),
+.editTable textarea {
+    width: 250px;
+}
+
+.editTable * {
+    display: block;
+    line-height: 20px;
+    margin-top: 5px;
+}
+
+div.errors {
+    border: 1px solid black;
+    width: 80%;
+    margin: 0 auto;
+}
+
+div.errors .error {
+    border: 1px solid black;
+    background: aquamarine;
+}
+
+div.errors .channelName {
+    background: cadetblue;
+}
+
+/*
+div.errors div:nth-child(1) {
+    display: inline;
+    font-weight: bold;
+}
+
+div.errors div:nth-child(2) {
+    display: inline;
+    margin-left:calc(0.4 * 1em);
+}
+
+div.errors div:nth-child(3) {
+    background: darksalmon;
+}*/
