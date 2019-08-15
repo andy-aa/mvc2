@@ -2,5 +2,5 @@
 
 class  TableTwoController extends AbstractTableController
 {
-    public $tableName = 'mydb.gb';
+    public $tableName = 'products';
 }

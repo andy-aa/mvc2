@@ -16,8 +16,7 @@ abstract class  AbstractTableController extends AbstractController
 
     public function actionShowTable()
     {
-        URL::uriDecode(['page']);
-        $page = (int)(isset($_GET['page']) ? $_GET['page'] : 1);
+        $page = (int)(!empty($_GET['page']) ? $_GET['page'] : 1);
 
         $this->render("show", [
             'title' => "show",
@@ -26,50 +25,45 @@ abstract class  AbstractTableController extends AbstractController
             'pageCount' => $this->table->pageCount(),
             'primaryKey' => $this->table->getPrimaryKey(),
             'currentPage' => $page,
-//            'paginationURL' => "?t={$this->shortClassName()}&a={$this->shortCurrentActionName()}&page=",
-            'paginationURL' => URL::uriEncode("?t={$this->shortClassName()}&a={$this->shortCurrentActionName()}&page="),
-            'showAddFormURL' => URL::uriEncode("?t={$this->shortClassName()}&a=showaddform"),
-            'delRowURL' => "?t={$this->shortClassName()}&a=delrow&id=",
-            'showEditFormURL' => URL::uriEncode("?t={$this->shortClassName()}&a=showeditform&id=")
+            'className' => $this->shortClassName(),
         ]);
     }
 
     public function actionDelRow()
     {
-        URL::uriDecode(['id']);
         $this->table->del($_GET['id']);
-        $this->redirect(URL::uriEncode("?t={$this->shortClassName()}&a=showtable"));
+        $this->redirect(HTML::url("{$this->shortClassName()}/ShowTable", ['page' => 1]));
+    }
+
+    public function actionEditRow()
+    {
+        $this->table->edit($_GET['id'], $_POST);
+        $this->redirect(HTML::url("{$this->shortClassName()}/ShowTable", ['page' => 1]));
     }
 
     public function actionAddRow()
     {
         $this->table->add($_POST);
-        $this->redirect(URL::uriEncode("?t={$this->shortClassName()}&a=showtable&page={$this->table->pageCount()}"));
+        $this->redirect(HTML::url("{$this->shortClassName()}/ShowTable", ['page' => $this->table->pageCount() ?: 1]));
     }
 
     public function actionShowAddForm()
     {
         $this->render("showAddEditForm", [
             'fields' => $this->table->getColumnsPropertiesWithoutId(),
-            'targetURL' => "?t={$this->shortClassName()}&a=addrow"
+            'targetURL' => HTML::url("{$this->shortClassName()}/AddRow")
         ]);
-    }
-
-    public function actionEditRow()
-    {
-        $this->table->edit($_GET['id'], $_POST);
-        $this->redirect(URL::uriEncode("?t={$this->shortClassName()}&a=showtable"));
     }
 
     public function actionShowEditForm()
     {
 //         $this->table->runSQL("se lkjhg jgjh");
 //        print_r($this->table->getColumnsProperties());
-        URL::uriDecode(['id']);
+
         $this->render("showAddEditForm", [
             'data' => $this->table->getRowById($_GET['id']),
             'fields' => $this->table->getColumnsPropertiesWithoutId(),
-            'targetURL' => "?t={$this->shortClassName()}&a=editrow&id={$_GET['id']}"
+            'targetURL' => HTML::url("{$this->shortClassName()}/EditRow", ['id' => $_GET['id']])
         ]);
     }
 

@@ -23,7 +23,7 @@ final class HTML
     public static function pagination(
         int $PageCount,
         int $currentPage = null,
-        string $currentURL = '',
+        string $handler = '',
         string $currentPageClass = 'currentPage',
         string $WrappingClass = 'pagination'
     ): string
@@ -31,7 +31,7 @@ final class HTML
         $pagination = '';
         for ($i = 1; $i <= $PageCount; $i++) {
             $pagination .= "<a " . ($currentPage == $i ? "class=\"$currentPageClass\"" : '') .
-                " href=\"$currentURL$i\">$i</a>";
+                ' href="' . HTML::url($handler, ['page' => $i]) . "\">$i</a>";
         }
         return "<div class=\"$WrappingClass\">$pagination</div>";
     }
@@ -65,5 +65,11 @@ final class HTML
 
         return $res;
     }
+
+    public static function url($handler, $vars = []): string
+    {
+        return URL::getInstance()->to($handler, $vars);
+    }
+
 
 }

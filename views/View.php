@@ -26,12 +26,12 @@ class  View
 //        define('CLEAN_URL_PATH', str_replace(basename($_SERVER['PHP_SELF']), '', $_SERVER['PHP_SELF']));
 
         extract($this->viewData);
-        include $this->layout;
+        include $_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . $this->layout;
     }
 
     public function body()
     {
         extract($this->viewData);
-        include $this->patternsPath . $this->viewName . ".php";
+        include $_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . $this->patternsPath . $this->viewName . ".php";
     }
 }

@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-include_once "core/autoload.php";
+include_once "../core/autoload.php";
 
 
 (new Router())->run();

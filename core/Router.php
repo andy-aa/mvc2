@@ -4,13 +4,23 @@ class Router
 {
     public $controllerName;
     public $actionName;
+    public $url;
 
     public function __construct()
     {
-        URL::init();
+        $decodeUri = URL::getInstance()->decodeUri($_SERVER['REQUEST_URI']);
 
-        $this->controllerName = ($_GET["t"] ?? Conf::DEFAULT_CONTROLLER) . 'Controller';
-        $this->actionName = 'action' . ($_GET["a"] ?? Conf::DEFAULT_ACTION);
+        URL::getInstance()->to('TableOne/ShowTable');
+
+        if ($decodeUri !== null) {
+            $handler = explode('/', $decodeUri['handler']);
+            $this->controllerName = $handler[0] . 'Controller';
+            $this->actionName = 'action' . $handler[1];
+            $_GET = array_merge($_GET, $decodeUri['vars']);
+        } elseif (isset($_GET["a"])) {
+            $this->controllerName = ($_GET["t"] ?? Conf::DEFAULT_CONTROLLER) . 'Controller';
+            $this->actionName = 'action' . $_GET["a"];
+        }
     }
 
 

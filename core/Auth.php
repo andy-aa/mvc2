@@ -51,16 +51,10 @@ class Auth
 
     static public function checkControllerPermit($className)
     {
-//        print_r(self::findAllControllers());
-//        print_r($_SESSION);
-//        $permits = json_decode(file_get_contents('core/permits.json'), true);
-//        $permits['adm'] = self::findAllControllers();
-//        file_put_contents('core/permits2.json', json_encode($permits));
 
-        $permits = include('core/permits.php');
-
-//        file_put_contents('core/permits2.php', "<?php \n return ".var_export($permits, true).';');
-//        print_r($permits);
+        $permits = json_decode(
+            file_get_contents($_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . 'core/permits.json'),
+            true);
 
         return !in_array(
             strtolower($className),
@@ -76,7 +70,7 @@ class Auth
 
     static public function currentUserInfo()
     {
-        return isset($_SESSION['user'])?"{$_SESSION['user']['name']} {$_SESSION['user']['surname']} ({$_SESSION['user']['description']})":'';
+        return isset($_SESSION['user']) ? "{$_SESSION['user']['name']} {$_SESSION['user']['surname']} ({$_SESSION['user']['description']})" : '';
     }
 
     static public function init()

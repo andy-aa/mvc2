@@ -2,5 +2,5 @@
 
 class  TableOneController extends AbstractTableController
 {
-    public $tableName = 'mydb.tab1';
+    public $tableName = 'categories';
 }

@@ -15,13 +15,14 @@
  * @var string $showEditFormURL
  *
  * @var string $showAddFormURL
+ * @var string $className
  *
  */
 ?>
 
 <h1><?= ($title) ?></h1>
 
-<?= $pagination = HTML::pagination($pageCount, $currentPage, $paginationURL) ?>
+<?= $pagination = HTML::pagination($pageCount, $currentPage, "$className/ShowTable") ?>
 
 <table class="table">
     <tr>
@@ -40,8 +41,10 @@
             }
             ?>
             <td>
-                <a href="<?= $delRowURL . $row[$primaryKey] ?>" class="delLink" title="delete">×</a>
-                <a href="<?= $showEditFormURL . $row[$primaryKey] ?>" class="editLink" title="edit">edit</a>
+                <a href="<?= HTML::url("$className/DelRow", ['id' => $row[$primaryKey]]) ?>" class="delLink"
+                   title="delete">×</a>
+                <a href="<?= HTML::url("$className/ShowEditForm", ['id' => $row[$primaryKey]]) ?>" class="editLink"
+                   title="edit">edit</a>
             </td>
         </tr>
         <?php
@@ -50,4 +53,4 @@
 </table>
 <?= $pagination ?>
 <br>
-<a href="<?= $showAddFormURL ?>">ADD</a>
+<a href="<?= HTML::url("$className/ShowAddForm") ?>">ADD</a>

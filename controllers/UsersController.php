@@ -19,19 +19,18 @@ class  UsersController extends AbstractTableController
         $this->render("showUsersAddEditForm", [
             'fields' => $this->table->getColumnsPropertiesWithoutId(),
             'user_group' => $this->table->getUserGroupDescription(),
-            'targetURL' => "?t={$this->shortClassName()}&a=addrow"
+            'targetURL' => HTML::url("{$this->shortClassName()}/AddRow")
         ]);
     }
 
     public function actionShowEditForm()
     {
-        URL::uriDecode(['id']);
         $this->view->setPatternsPath('views/users/');
         $this->render("showUsersAddEditForm", [
             'data' => $this->table->getRowById($_GET['id']),
             'fields' => $this->table->getColumnsPropertiesWithoutId(),
             'user_group' => $this->table->getUserGroupDescription(),
-            'targetURL' => "?t={$this->shortClassName()}&a=editrow&id={$_GET['id']}"
+            'targetURL' => HTML::url("{$this->shortClassName()}/EditRow", ['id' => $_GET['id']])
         ]);
     }
 }

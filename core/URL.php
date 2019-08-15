@@ -3,45 +3,94 @@
 
 class URL
 {
-    public static $parts;
+    use SingletonTrait,
+        DispatcherTrait;
 
-    public static $cleanURL = Conf::CLEAN_URL;
 
-    public static function init()
+    public function decodeUri($uri)
     {
-        if (self::$cleanURL) {
-            
-            self::$parts = explode(
-                '/',
-                trim(
-                    parse_url($_SERVER['REQUEST_URI'])['path'],
-                    "/"
-                )
-            );
+        foreach ($this->dispatcher as $pattern => $handler) {
+            if (preg_match_all($this->getRegExp($pattern), $uri)) {
 
-            if (!empty(self::$parts[0]) && !empty(self::$parts[1])) {
-                $_GET["t"] = self::$parts[0];
-                $_GET["a"] = self::$parts[1];
+                return ['handler' => $handler, 'vars' => $this->getVars($pattern, $uri)];
             }
         }
+
+        return null;
     }
 
-    public static function uriEncode(string $url)
+    public function getRegExp($pattern)
     {
-        parse_str(
-            parse_url($url)['query'],
-            $vars
+
+        $pattern = preg_replace(
+            "~\{[0-9A-Za-z]+\}~i",
+            "([0-9A-Za-z]+)",
+            $pattern
         );
 
-        return self::$cleanURL ? implode('/', $vars) : $url;
+        return "~^/$pattern$~i";
     }
 
-    public static function uriDecode(array $rules = [])
+    public function getVars($pattern, $uri)
     {
-        foreach ($rules as $key => $rule) {
-            if (isset(self::$parts[$key + 2])) {
-                $_GET[$rule] = self::$parts[$key + 2];
-            }
+        preg_match_all(
+            "~\{([0-9A-Za-z]+)\}~i",
+            $pattern,
+            $match
+        );
+
+        $varNames = $match[1];
+
+        preg_match_all(
+            $this->getRegExp($pattern),
+            $uri,
+            $varValues
+        );
+
+        array_shift($varValues);
+
+        $vars = [];
+        foreach ($varNames as $key => $value) {
+            $vars[$value] = $varValues[$key][0];
         }
+
+        return $vars;
     }
+
+    public function to($handler, $vars = [])
+    {
+        if (Conf::CLEAN_URL) {
+            return '/' . preg_replace(
+
+                    preg_replace(
+                        "~^.*$~i",
+                        "~\{$0\}~i",
+                        array_keys($vars)
+                    ),
+
+                    $vars,
+
+//            array_search(
+//                $handler,
+//                $this->routs
+//            )
+
+                    array_search(
+                        strtolower($handler),
+                        array_map(
+                            'strtolower',
+                            $this->dispatcher
+                        )
+                    )
+
+                );
+        } else {
+            $handler = explode('/', $handler);
+
+            return "?t=$handler[0]&a=$handler[0]&" . http_build_query($vars);
+        }
+
+
+    }
+
 }
