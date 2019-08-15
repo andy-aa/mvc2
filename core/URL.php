@@ -87,7 +87,7 @@ class URL
         } else {
             $handler = explode('/', $handler);
 
-            return "?t=$handler[0]&a=$handler[0]&" . http_build_query($vars);
+            return "?t=$handler[0]&a=$handler[1]&" . http_build_query($vars);
         }
 
 

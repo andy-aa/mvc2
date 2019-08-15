@@ -10,7 +10,7 @@ class Router
     {
         $decodeUri = URL::getInstance()->decodeUri($_SERVER['REQUEST_URI']);
 
-        URL::getInstance()->to('TableOne/ShowTable');
+//        URL::getInstance()->to('TableOne/ShowTable');
 
         if ($decodeUri !== null) {
             $handler = explode('/', $decodeUri['handler']);
