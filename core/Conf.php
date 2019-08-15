@@ -14,6 +14,6 @@ class Conf
     const DEFAULT_LAYOUT = 'views/_layouts/mainLayout.php';
     const DEFAULT_PATTERNS_PATH = 'views/site/';
 
-    const CLEAN_URL = true;
+    const CLEAN_URL = false;
 
 }
