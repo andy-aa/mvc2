@@ -8,8 +8,7 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "src/",
-            "PHPTDD\\": "../../../../../Program Files/Microsoft VS Code/tests/unit"
+            "App\\": "src/"
         }
     }
 }
