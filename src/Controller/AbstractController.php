@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Core\Conf;
 use App\View\View;
+use ReflectionClass;
 
 abstract class AbstractController
 {
@@ -47,7 +48,7 @@ abstract class AbstractController
 
     public function shortClassName()
     {
-        return strtolower(preg_replace('/Controller$/', '', (new \ReflectionClass($this))->getShortName()));
+        return strtolower(preg_replace('/Controller$/', '', (new ReflectionClass($this))->getShortName()));
     }
 
     public function shortCurrentActionName()

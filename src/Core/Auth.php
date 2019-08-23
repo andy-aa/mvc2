@@ -6,7 +6,7 @@ use App\Model\AuthModel;
 
 class Auth
 {
-    private static $instance = null;
+//    private static $instance = null;
 
 //    static public function checkUser($login, $pass)
 //    {
@@ -23,7 +23,7 @@ class Auth
 
     static public function registerUser($login, $pass)
     {
-        $table = new AuthModel('users', Core\Database::Link());
+        $table = new AuthModel('users', Database::Link());
 
         if (($userGroup = $table->getUserData($login, $pass)) !== null) {
             $_SESSION['user'] = $userGroup;
@@ -55,9 +55,11 @@ class Auth
 
     static public function checkControllerPermit($className)
     {
-
         $permits = json_decode(
-            file_get_contents(dirname(__FILE__) . '/permits.json'),
+            file_get_contents(
+                dirname(__FILE__) .
+                '/permits.json'
+            ),
             true);
 
         return !in_array(
@@ -77,12 +79,12 @@ class Auth
         return isset($_SESSION['user']) ? "{$_SESSION['user']['name']} {$_SESSION['user']['surname']} ({$_SESSION['user']['description']})" : '';
     }
 
-    static public function init()
-    {
-        if (self::$instance == null) {
-            self::$instance = new static();
-        }
-
-        return self::$instance;
-    }
+//    static public function init()
+//    {
+//        if (self::$instance == null) {
+//            self::$instance = new static();
+//        }
+//
+//        return self::$instance;
+//    }
 }

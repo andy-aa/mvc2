@@ -1,6 +1,7 @@
 {
-    "require": {
-        "monolog/monolog": "^1.24",
-        "ext-mysqli": "*"
-    }
+  "require": {
+    "monolog/monolog": "^1.24",
+    "ext-mysqli": "*",
+    "ext-json": "*"
+  }
 }
