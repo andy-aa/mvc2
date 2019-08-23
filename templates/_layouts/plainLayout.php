@@ -1,6 +1,6 @@
 <?php
 
-/* @var $this View\View */
+/* @var $this App\View\View */
 /** @var string $title */
 
 ?>

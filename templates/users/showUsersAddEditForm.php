@@ -1,6 +1,6 @@
 <?php
 
-use View\Helper\HTML;
+use App\View\Helper\HTML;
 
 /**
  * @var string $title

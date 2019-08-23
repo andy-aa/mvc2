@@ -1,7 +1,7 @@
 <?php
-use Core\{Auth, ErrorHandler};use View\Helper\HTML;
+use App\Core\{Auth, ErrorHandler};use App\View\Helper\HTML;
 
-/* @var $this View\View */
+/* @var $this App\View\View */
 /** @var string $title */
 
 
