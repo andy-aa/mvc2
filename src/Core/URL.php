@@ -9,7 +9,7 @@ class URL
         DispatcherTrait;
 
 
-    public function decodeUri($uri)
+    public function decodeUri(string $uri): ?array
     {
         foreach ($this->dispatcher as $pattern => $handler) {
             if (preg_match_all($this->getRegExp($pattern), $uri)) {
@@ -21,19 +21,19 @@ class URL
         return null;
     }
 
-    public function getRegExp($pattern)
+    public function getRegExp(string $pattern): string
     {
 
         $pattern = preg_replace(
-            "~\{[0-9A-Za-z]+\}~i",
+            "~\\\{[0-9A-Za-z]+\\\}~i",
             "([0-9A-Za-z]+)",
-            $pattern
+            preg_quote($pattern)
         );
 
         return "~^/$pattern$~i";
     }
 
-    public function getVars($pattern, $uri)
+    public function getVars(string $pattern, string $uri): array
     {
         preg_match_all(
             "~\{([0-9A-Za-z]+)\}~i",
@@ -59,7 +59,7 @@ class URL
         return $vars;
     }
 
-    public function to($handler, $vars = [])
+    public function to(string $handler, array $vars = [])
     {
         if (Conf::CLEAN_URL) {
             return '/' . preg_replace(
