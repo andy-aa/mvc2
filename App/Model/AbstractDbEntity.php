@@ -1,6 +1,8 @@
 <?php
 namespace Model;
 
+use mysqli;
+
 abstract class AbstractDbEntity implements DbEntityInterface
 {
     use DbEntityPageTrait,
@@ -23,7 +25,7 @@ abstract class AbstractDbEntity implements DbEntityInterface
         'LIMIT' => null
     ];
 
-    public function __construct(string $tableName, \mysqli $mysqli)
+    public function __construct(string $tableName, mysqli $mysqli)
     {
         $this->mysqli = $mysqli;
         $this->setTableName($tableName);
