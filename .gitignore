@@ -1,3 +1,4 @@
-.idea/
-/nbproject/
-/logs/
+.idea
+nbproject
+logs/error.log
+vendor
