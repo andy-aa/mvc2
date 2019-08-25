@@ -9,3 +9,5 @@
 * vendor\bin\phpunit --colors tests/UrlTest
 * vendor\bin\phpunit --filter testComplexUrl UrlTest tests/UrlTest.php
 
+#composer
+composer run-script test
