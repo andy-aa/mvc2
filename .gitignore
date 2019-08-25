@@ -1,4 +1,4 @@
-.idea
-nbproject
-logs
-vendor
+.idea/
+/nbproject/
+/logs/
+/vendor/

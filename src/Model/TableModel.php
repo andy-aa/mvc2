@@ -14,7 +14,7 @@ class TableModel extends AbstractDbEntity
         ErrorHandler::add('MySql', $error);
 
         $log = new Logger('MySql');
-        $log->pushHandler(new StreamHandler("$_SERVER[DOCUMENT_ROOT]/logs/error.log", Logger::DEBUG));
+        $log->pushHandler(new StreamHandler(__DIR__ . "/../../logs/error.log", Logger::DEBUG));
         $log->pushProcessor(new WebProcessor());
         $log->error("ClassName: " . static::class, $error);
     }
