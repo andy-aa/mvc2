@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class UrlTest extends TestCase
 {
-    function testUrl()
+    function testUrlRegExp()
     {
         $this->assertEquals(
             true,
@@ -24,6 +24,10 @@ class UrlTest extends TestCase
                 '/group/edit_form157.html'
             )
         );
+    }
+
+    function testUrlVars()
+    {
 
         $this->assertEquals(
             ['id' => 157],
@@ -47,9 +51,13 @@ class UrlTest extends TestCase
 
         $this->assertEquals(
             ['handler' => 'TableOne/ShowTable', 'vars' => ['page' => 56]],
-            URL::getInstance()->decodeUri('/one/page56.html')
+            URL::getInstance()->decodeUri('/one/page56')
         );
 
+        $this->assertEquals(
+            null,
+            URL::getInstance()->decodeUri('/jhjhb/lbjvdglkb/vndfkkl')
+        );
 
     }
 

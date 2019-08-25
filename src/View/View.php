@@ -1,4 +1,5 @@
 <?php
+
 namespace App\View;
 
 class  View
@@ -27,12 +28,12 @@ class  View
 //        define('CLEAN_URL_PATH', str_replace(basename($_SERVER['PHP_SELF']), '', $_SERVER['PHP_SELF']));
 
         extract($this->viewData);
-        include $_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . $this->layout;
+        include __DIR__ . "/../../$this->layout";
     }
 
     public function body()
     {
         extract($this->viewData);
-        include $_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . $this->patternsPath . $this->viewName . ".php";
+        include __DIR__ . "/../../{$this->patternsPath}{$this->viewName}.php";
     }
 }

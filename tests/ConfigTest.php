@@ -9,9 +9,17 @@ class ConfigTest extends TestCase
 {
     function testDefaultController()
     {
-        $this->assertIsString(Conf::DEFAULT_CONTROLLER, 'Is not string');
+        $this->assertIsString(
+            Conf::DEFAULT_CONTROLLER,
+            'Is not string'
+        );
 
-        $this->assertEquals('Site', Conf::DEFAULT_CONTROLLER, 'Not correct default controller');
+        $this->assertEquals(
+            'Site',
+            Conf::DEFAULT_CONTROLLER,
+            'Not correct default controller'
+        );
+
     }
 
 }
