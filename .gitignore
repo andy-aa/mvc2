@@ -3,3 +3,5 @@ nbproject
 logs/error.log
 vendor
 .phpunit.result.cache
+*.mwb.bak
+*.mwb.beforefix
