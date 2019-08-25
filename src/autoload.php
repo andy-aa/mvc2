@@ -3,7 +3,7 @@
 spl_autoload_register(
     function ($class) {
 
-        $source = $_SERVER['DOCUMENT_ROOT'] . str_replace(
+        $source = __DIR__ . "/../" . str_replace(
                 ['\\App\\', "\\"],
                 ['\\src\\', DIRECTORY_SEPARATOR],
                 "\\$class.php"
