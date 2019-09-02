@@ -14,23 +14,21 @@ class ErrorController extends AbstractController
         $this->render("error", [
             'text' => 'Access Denied'
         ]);
+
+        exit();
+
     }
 
-    public function notFoundController($controllerName)
+    public function notFoundError($text)
     {
         $this->notFound();
 
         $this->render("error", [
-            'text' => "Not Found Controller: $controllerName"
+            'text' => $text
         ]);
+
+        exit();
+
     }
 
-    public function notFoundAction($actionName)
-    {
-        $this->notFound();
-
-        $this->render("error", [
-            'text' => "Not Found Action: $actionName"
-        ]);
-    }
 }

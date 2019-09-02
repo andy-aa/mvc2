@@ -41,11 +41,11 @@ class Router
                     $MVC->{$this->actionName}();
                 } else {
                     // echo "нет такого метода: $this->methodName";
-                    (new ErrorController())->notFoundAction($this->actionName);
+                    (new ErrorController())->notFoundError("Not Found Action: {$this->actionName}");
                 }
             } else {
 //                echo "нет такого класса: $this->controllerName";
-                (new ErrorController())->notFoundController($this->controllerName);
+                (new ErrorController())->notFoundError("Not Found Controller: {$this->controllerName}");
             }
         } else {
             // echo "ошибка доступа";
