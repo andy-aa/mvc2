@@ -6,6 +6,8 @@ use App\Controller\ErrorController;
 use mysqli;
 use mysqli_sql_exception;
 
+mysqli_report(MYSQLI_REPORT_STRICT);
+
 class Database
 {
 
@@ -15,27 +17,20 @@ class Database
     {
 
         try {
-            mysqli_report(MYSQLI_REPORT_STRICT);
-
-            $newLink = new mysqli(
+            return @new mysqli(
                 Conf::MYSQL_HOST,
                 Conf::MYSQL_USER,
                 Conf::MYSQL_PASS,
                 Conf::MYSQL_DB
             );
-
-            mysqli_report(MYSQLI_REPORT_OFF);
-
-            return $newLink;
-
         } catch (mysqli_sql_exception $e) {
-            (new ErrorController())->notFoundError("Error connecting to database");
+            (new ErrorController())->notFoundError($e->getMessage());
         }
 
     }
 
     static public function Link()
     {
-        return self::$instance ?? self::$instance = self::newLink();
+            return self::$instance ?? self::$instance = self::newLink();
     }
 }
