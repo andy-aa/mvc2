@@ -13,24 +13,27 @@ class Database
 
     private static $instance = null;
 
-    static private function newLink(): mysqli
+    static public function toUtf($string)
     {
-
-        try {
-            return @new mysqli(
-                Conf::MYSQL_HOST,
-                Conf::MYSQL_USER,
-                Conf::MYSQL_PASS,
-                Conf::MYSQL_DB
-            );
-        } catch (mysqli_sql_exception $e) {
-            (new ErrorController())->notFoundError($e->getMessage());
+        // If it's not already UTF-8, convert to it
+        if (mb_detect_encoding($string, 'utf-8', true) === false) {
+            $string = mb_convert_encoding($string, 'utf-8', 'windows-1251');
         }
 
+        return $string;
     }
 
     static public function Link()
     {
-            return self::$instance ?? self::$instance = self::newLink();
+        try {
+            return self::$instance ?? self::$instance = @new mysqli(
+                    Conf::MYSQL_HOST,
+                    Conf::MYSQL_USER,
+                    Conf::MYSQL_PASS,
+                    Conf::MYSQL_DB
+                );
+        } catch (mysqli_sql_exception $e) {
+            (new ErrorController())->notFoundError(self::toUtf($e->getMessage()));
+        }
     }
 }
